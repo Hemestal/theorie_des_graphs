@@ -12,9 +12,10 @@ def lire_un_fichier():
     compteur_string=0
     compteur_fichier=2
     while len(lignes)!=compteur_fichier:
-        separation=lignes[compteur_fichier].split(" ")#
+        separation=lignes[compteur_fichier].split(" ")
         graph.append([int(separation[0]),int(separation[1]),int(separation[2])])
         compteur_fichier=compteur_fichier+1
+        print(compteur_fichier)
     print(graph)
     fichier.close()
 lire_un_fichier()
