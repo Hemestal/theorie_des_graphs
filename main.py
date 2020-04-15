@@ -2,7 +2,7 @@
 from array import *
 def lire_un_fichier():
     #on ouvre le fichier
-    fichier = open("L3_E08_1.txt","r")
+    fichier = open("graphe2.txt","r")
     graph=[]#on créer le tableau mémoire
     lignes=fichier.readlines()#on transforme lignes en tableaux de lignes du fichier
     valeur=int(lignes[0])#transforme la premiere ligne en int
@@ -70,29 +70,67 @@ def matrice_valeur(initial,terminal,arc,nbsommet,nbarc):
                 ajoutage=0
             compteur=0
     return tab
-"""
-def detection_circuit(initial,terminal,arc,nbsommet,nbarc):
-    print("detection de cicruit\n")
-    print("Méthode d’élimination des points d’entrée\n")
-    pas_entree=False
-    entree_suppr=[]
-    while(pas_entree != True or len(terminal)==0):
-        for i in range(0,nbsommet):
-            if(i not in terminal):
-                for y in range(0,len(terminal)-1):
-                    print("\npoint d'entrée:\n")
-                    if(initial[y]==i):
-                        print(y)
-                        initial.pop(y)
-                        terminal.pop(y)
+
+def point_entre(terminal,sommet_reste):
+    #prend en parametre fusion,sommet restant, retourne tab de point d'entrée regarde dans fusion colonne 2 si il y a des valeurs qui manque parmis les sommets restants
+    point_entre=[]
+    supprimer=True
+    for i in range (0,len(sommet_reste)):
+        supprimer=True
+        for j in range (0,len(terminal)):
+            if (sommet_reste[i]==terminal[j]):
+                supprimer=False
+        if (supprimer==True):
+            point_entre.append(sommet_reste[i])
+    return point_entre
+
+def suppr_point(pt_entree,initial,terminal):
+    #prend en parametre point entrée et le graph fusion, supprime toutes les valeurs qui coincident entre pt entrée et fusion premiere colonne
+    compteur=0
+    taille_init=len(initial)
+    for entree in pt_entree:
+        while compteur<len(initial):
+            if(entree==initial[compteur]):
+                del initial[compteur]
+                del terminal[compteur]
             else:
-                print("aucun\n")
-                pas_entree=True
-    if(pas_entree==False):
-        print("le graphe contient au moins un circuit")
-    elif(pas_entree==True):
-        print("il n'y a pas de circuits")
-"""
+                compteur=compteur+1
+        compteur=0
+    #print("tableau init:",initial)
+    #print("tableau term:",terminal)
+    return initial,terminal
+
+def detect_circuit(initial,terminal,nbsommet):
+    """
+    detect si fin algo=>tab point entrer vide et sommet restant taille est 1=>pas circuit
+    si tab_entree est vide et sommet restant>1
+
+    1st step: detect les entrées
+    2nd step: supprime ces points
+    3rd step: on répète
+    detection de sortie=>en haut
+    """
+    #pt_entree=[]
+    sommet_reste=[]
+    for i in range(0,nbsommet):
+        sommet_reste.append(i)
+    while(True):
+        print("points d'entrées:\n")
+        pt_entree=point_entre(terminal,sommet_reste)
+        print(pt_entree,"\n")
+        for entree in pt_entree:#on supprime les sommets qui sont des points d'entrées dans le tab des sommets restants
+            if (entree in sommet_reste):
+                sommet_reste.remove(entree)
+        print("sommet restant:\n")
+        print(sommet_reste)
+        initial,terminal=suppr_point(pt_entree,initial,terminal)
+        if(len(sommet_reste)==1):#condition de sortie
+            print("pas circuit")
+            break
+        elif(len(pt_entree)==0 and len(sommet_reste)>1):#condition de sortie
+            print("c 1 circuit")
+            break
+
 
 def separation(graph):#dans cette fonction, on décompose le premier tableau pour que ce soit plus pratique
     nbsommet=graph[0]
@@ -119,5 +157,5 @@ def main():
     initial,terminal,arc,nbsommet,nbarc=separation(graph)
     matrice_adj=matrice_adjacence(initial,terminal,arc,nbsommet,nbarc)
     matrice_val=matrice_valeur(initial,terminal,arc,nbsommet,nbarc)
-    afficher_tableau(matrice_adj)
+    detect_circuit(initial,terminal,nbsommet)
 main()
