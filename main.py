@@ -2,7 +2,7 @@
 from array import *
 def lire_un_fichier():
     #on ouvre le fichier
-    fichier = open("graphe12.txt","r")
+    fichier = open("graphe5.txt","r")
     graph=[]#on créer le tableau mémoire
     lignes=fichier.readlines()#on transforme lignes en tableaux de lignes du fichier
     valeur=int(lignes[0])#transforme la premiere ligne en int
@@ -98,7 +98,7 @@ def suppr_point(pt_entree,initial,terminal):
         compteur=0
     return initial,terminal
 
-def detect_circuit(initialtab,terminaltab,nbsommet):
+def detect_circuit(initialtab,terminaltab,nbsommet,afficher):
     """
     detect si fin algo=>tab point entrer vide et sommet restant taille est 1=>pas circuit
     si tab_entree est vide et sommet restant>1
@@ -112,21 +112,26 @@ def detect_circuit(initialtab,terminaltab,nbsommet):
     for i in range(0,nbsommet):
         sommet_reste.append(i)
     while(True):
-        print("points d'entrées:\n")
+        if(afficher==True):
+            print("points d'entrées:\n")
         pt_entree=point_entre(terminaltab,sommet_reste)
-        print(pt_entree,"\n")
+        if(afficher==True):
+            print(pt_entree,"\n")
         for entree in pt_entree:#on supprime les sommets qui sont des points d'entrées dans le tab des sommets restants
             if (entree in sommet_reste):
                 sommet_reste.remove(entree)
-        print("sommet restant:\n")
-        print(sommet_reste)
+        if(afficher==True):
+            print("sommet restant:\n")
+            print(sommet_reste)
         initialtab,terminaltab=suppr_point(pt_entree,initialtab,terminaltab)
         if(len(sommet_reste)==1):#condition de sortie
-            print("pas circuit")
+            if(afficher==True):
+                print("pas circuit")
             return True
             break
         elif(len(pt_entree)==0 and len(sommet_reste)>1):#condition de sortie
-            print("c 1 circuit")
+            if(afficher==True):
+                print("c 1 circuit")
             return False
             break
 
@@ -145,7 +150,6 @@ def ordo(initial,terminal,arc,nbsommet,nbarc,graph):
     sommet=[]
     initialtab=initial
     terminaltab=terminal
-    print(initial)
     for i in range(0,nbsommet):
         sommet.append(i)
     pt_entree=point_entre(terminal,sommet)
@@ -154,7 +158,7 @@ def ordo(initial,terminal,arc,nbsommet,nbarc,graph):
         pt_sortie=point_sortie(terminal,sommet)
         if(len(pt_sortie)==1):
             print("il y a bien une seule sortie\n")
-            if(detect_circuit(initial,terminal,nbsommet)):
+            if(detect_circuit(initial,terminal,nbsommet,False)):
                 print("il n'y a pas de circuit\n")
                 graph=lire_un_fichier()
                 initial,terminal,arc,nbsommet,nbarc=separation(graph)
@@ -163,7 +167,8 @@ def ordo(initial,terminal,arc,nbsommet,nbarc,graph):
                     if(val_pt_entree(pt_entree[0],initial,arc)):
                             print("arcs incidents vers l’extérieur au point d’entrée de valeur nulle")
                             if(is_arc_negative(arc)):
-                                print("pas d’arcs à valeur négative")
+                                print("pas d’arc à valeur négative")
+                                print("c'est un ordonnancement correct")
                             else:
                                 print("l'ordonnancement n'est pas correct, il y a une valeur négative\n")
                     else:
@@ -209,7 +214,7 @@ def val_identique(initial,arc,nbsommet):
         for j in range(0,len(tab_comparatif)):
             if(tab_comparatif[0]!=tab_comparatif[j]):
                 return False
-        tab_comparatif.clear
+        tab_comparatif.clear()
     return True
 
 def is_arc_negative(arc):
@@ -240,7 +245,14 @@ def afficher_tableau(tab):
         print(i)
     print("\n")
 
-def rang_(pt_entree, rang, initial, terminal,circuit):
+
+def rang_(rang, initial, terminal,nbsommet):
+    sommet_reste=[]
+    rang = 0
+    for i in range(0,nbsommet):
+        sommet_reste.append(i)
+    pt_entree=point_entre(terminal, sommet_reste)
+    circuit=detect_circuit(initial,terminal,nbsommet,False)
     if circuit == True:
         tableau_rang = [[]]
         for x in range(0,len(pt_entree)):
@@ -249,11 +261,12 @@ def rang_(pt_entree, rang, initial, terminal,circuit):
     else:
         print("Il n'y a pas de rang pour ce graphe.\n\n")
 
+
 def main():
     graph=lire_un_fichier()
     initial,terminal,arc,nbsommet,nbarc=separation(graph)
     matrice_adj=matrice_adjacence(initial,terminal,arc,nbsommet,nbarc)
     matrice_val=matrice_valeur(initial,terminal,arc,nbsommet,nbarc)
-    #detect_circuit(initial,terminal,nbsommet)
+    detect_circuit(initial,terminal,nbsommet,True)
     ordo(initial,terminal,arc,nbsommet,nbarc,graph)
 main()
