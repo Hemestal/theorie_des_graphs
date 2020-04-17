@@ -1,6 +1,6 @@
 ﻿import os
 from array import *
-import numpy
+import numpy as np
 def lire_un_fichier():
     #on ouvre le fichier
     print("\n")
@@ -8,7 +8,7 @@ def lire_un_fichier():
     print("***** TON Steven, HULIN Pauline, PASCO-CASTILLO Marc *****")
     print("\n\n")
     print(" 1: G01\n 2: G02\n 3: G03\n 4: G04\n 5: G05\n 6: G06\n 7: G07\n 8: G08\n 9: G09\n10: G10\n11: G11\n12: G12\n13: G13\n14: Exit\n")
-    c =int(input("Vueillez choisir un nombre entre 1 et 14 pour choisir votre Graphes : "))
+    c =int(input("Veuillez choisir un nombre entre 1 et 14 pour choisir votre Graphes : "))
     while (c < 1 or c > 14):
         c = int(input("\nchoisir un nombre entre 1 et 14 seulement : "))
     if (c == 1):
@@ -146,13 +146,15 @@ def detect_circuit(initial,terminal,nbsommet,afficher):
     3rd step: on répète
     detection de sortie=>en haut
     """
+    initialtab=initial.copy()
+    terminaltab=terminal.copy()
     sommet_reste=[]
     for i in range(0,nbsommet):
         sommet_reste.append(i)
     while(True):
         if(afficher==True):
             print("points d'entrées:\n")
-        pt_entree=point_entre(terminal,sommet_reste)
+        pt_entree=point_entre(terminaltab,sommet_reste)
         if(afficher==True):
             print(pt_entree,"\n")
         for entree in pt_entree:#on supprime les sommets qui sont des points d'entrées dans le tab des sommets restants
@@ -161,7 +163,7 @@ def detect_circuit(initial,terminal,nbsommet,afficher):
         if(afficher==True):
             print("sommet restant:\n")
             print(sommet_reste)
-        initial,terminal=suppr_point(pt_entree,initial,terminal)
+        initialtab,terminaltab=suppr_point(pt_entree,initialtab,terminaltab)
         if(len(sommet_reste)==1):#condition de sortie
             if(afficher==True):
                 print("pas circuit")
@@ -174,7 +176,7 @@ def detect_circuit(initial,terminal,nbsommet,afficher):
             break
 
 
-def ordo(initial,terminal,arc,nbsommet,nbarc,graph):
+def ordo(initial,terminal,arc,nbsommet,nbarc,afficher):
     """
     prend en paramètre initial, terminal, arc
     appel fction pt entrée
@@ -187,45 +189,53 @@ def ordo(initial,terminal,arc,nbsommet,nbarc,graph):
     appel arc négative et retourne booléen
     """
     sommet=[]
-    initialtab=initial
-    terminaltab=terminal
     for i in range(0,nbsommet):
         sommet.append(i)
     pt_entree=point_entre(terminal,sommet)
     if(len(pt_entree)==1):
-        print("il y a bien une seule entrée\n")
+        if(afficher==True):
+            print("il y a bien une seule entrées\n")
         pt_sortie=point_sortie(terminal,sommet)
         if(len(pt_sortie)==1):
-            print("il y a bien une seule sortie\n")
-            if(detect_circuit(initial,terminal,nbsommet,False)):
-                print("il n'y a pas de circuit\n")
-                graph=lire_un_fichier()
-                initial,terminal,arc,nbsommet,nbarc=separation(graph)
+            if(afficher==True):
+                print("il y a bien une seule sorties\n")
+            if(detect_circuit(initial, terminal, nbsommet, False) ):
+                if(afficher==True):
+                    print("il n'y a pas de circuit\n")
                 if(val_identique(initial,arc,nbsommet)):
-                    print("valeurs identiques pour tous les arcs incidents vers l’extérieur à un sommet\n")
+                    if(afficher==True):
+                        print("valeurs identiques pour tous les arcs incidents vers l’extérieur à un sommet\n")
                     if(val_pt_entree(pt_entree[0],initial,arc)):
+                        if(afficher==True):
                             print("arcs incidents vers l’extérieur au point d’entrée de valeur nulle")
-                            if(is_arc_negative(arc)):
-                                print("pas d’arc à valeur négative")
-                                print("c'est un ordonnancement correct")
+                        if(is_arc_negative(arc)):
+                                if(afficher==True):
+                                    print("pas d’arc à valeur négative")
+                                    print("c'est un ordonnancement correct")
                                 return True
-                            else:
-                                print("l'ordonnancement n'est pas correct, il y a une valeur négative\n")
-                                return False
-                    else:
-                            print("l'ordonnancement n'est pas correct, arcs incidents vers l’extérieur au point d’entrée de valeur non nulle\n")
+                        else:
+                            if(afficher==True):
+                                    print("l'ordonnancement n'est pas correct, il y a une valeur négative\n")
                             return False
-                else:
-                        print("l'ordonnancement n'est pas correct, valeurs pas identique pour tous les arcs incidents vers l’extérieur à un sommet\n")
+                    else:
+                        if(afficher==True):
+                            print("l'ordonnancement n'est pas correct, arcs incidents vers l’extérieur au point d’entrée de valeur non nulle\n")
                         return False
+                else:
+                    if(afficher==True):
+                        print("l'ordonnancement n'est pas correct, valeurs pas identique pour tous les arcs incidents vers l’extérieur à un sommet\n")
+                    return False
             else:
-                print("l'ordonnancement n'est pas correct, le graphe comporte un circuit\n")
+                if(afficher==True):
+                    print("l'ordonnancement n'est pas correct, le graphe comporte un circuit\n")
                 return False
         else:
-            print("l'ordonnancement n'est pas correct, il y a pas un seul point de sortie\n")
+            if(afficher==True):
+                print("l'ordonnancement n'est pas correct, il y a pas un seul point de sortie\n")
             return False
     else:
-        print("l'ordonnancement n'est pas correct, il y a pas un seul point d'entrée\n")
+        if(afficher==True):
+            print("l'ordonnancement n'est pas correct, il y a pas un seul point d'entrée\n")
         return False
 
 
@@ -294,21 +304,22 @@ def afficher_tableau(tab):
 
 def rang(initial, terminal,nbsommet,afficher):
     ##regarder si le graphe est un circuit ou non
+    initialtab=initial.copy()
+    terminaltab=terminal.copy()
     rang=0
     sommet_reste=[]
-    sommet_tab=[None]*(nbsommet+1)#on crée la longueur du tableau
-    rang_tab=[None]*(nbsommet+1)#on crée la longueur du tableau
-    sommet_tab[0]="Sommet"
-    rang_tab[0]="Rang"
-    print(rang_tab)
+    sommet_tab=[]
+    rang_tab=[]
+    sommet_tab.append("sommet")
+    rang_tab.append("rang")
+    """
     for i in range(1,nbsommet+1):#on insère les sommets dans le tableau
         sommet_tab[i]=(i-1)
+    """
     for i in range(0,nbsommet):
         sommet_reste.append(i)#tableau avec tout les sommets non supprimé
-    pas_circuit=detect_circuit(initial,terminal,nbsommet,False)
-    graph=lire_un_fichier()
-    initial,terminal,arc,nbsommet,nbarc=separation(graph)
-    nb_entree=point_entre(terminal, sommet_reste)
+    pas_circuit=detect_circuit(initialtab,terminaltab,nbsommet,False)
+    nb_entree=point_entre(terminaltab, sommet_reste)
     if pas_circuit==True:#Si notre graphe n'est pas un circuit
 
         if(afficher==True):
@@ -317,36 +328,197 @@ def rang(initial, terminal,nbsommet,afficher):
         while len(sommet_reste)!=0:#tant qu'il y a des sommets
             if(afficher==True):
                 print("rang courant = ",rang,"\n")
-                print("points d'entrée:\n",nb_entree,"\n")
+                print("points d'entrées:\n",nb_entree,"\n")
             for entree in nb_entree:#on supprime les sommets qui sont des points d'entrées dans le tab des sommets restants
                 if (entree in sommet_reste):
                     sommet_reste.remove(entree)
+            """
             for i in range (1,len(rang_tab)):
                 for entree in nb_entree:
                     if(sommet_tab[i]==entree):
                         rang_tab[i]=rang
+            """
+            for i in range (0,len(nb_entree)):
+                rang_tab.append(rang)
+            for entree in nb_entree:
+                sommet_tab.append(entree)
             rang+=1
-            initial,terminal=suppr_point(nb_entree,initial,terminal)
-            nb_entree=point_entre(terminal, sommet_reste)
+            initialtab,terminaltab=suppr_point(nb_entree,initialtab,terminaltab)
+            nb_entree=point_entre(terminaltab, sommet_reste)
             tab_rang=[]
-            tab_rang.append([sommet_tab])
-            tab_rang.append([rang_tab])
+            tab_rang.append(rang_tab)
+            tab_rang.append(sommet_tab)
         if(afficher==True):
             afficher_tableau(tab_rang)
+        return tab_rang
     else:
         if(afficher==True):
             print("impossible votre graphe comporte un circuit")
 
-def
+
+def tacheetsalongueur(tab_rang,initial,arc,nbsommet):
+    longueur=[]
+    calendrier=[]
+    longueur.append("longueur")
+    for i in range (1,len(tab_rang[1])):#parcours le tableau de tabrang pour associer une longueur a un sommet
+        for j in range(0,len(initial)):
+            if (tab_rang[1][i]==initial[j]):
+                longueur.append(arc[j])
+                break
+    longueur.append(None)
+    calendrier.append(tab_rang[0])
+    calendrier.append(tab_rang[1])
+    calendrier.append(longueur)
+    return calendrier
+
+
+def calendrier_opluto(initial,terminal,arc,nbsommet,nbarc,afficher):#cette fonction appelera seulement les auters fonctions
+    max_value=0
+    is_correct=ordo(initial,terminal,arc,nbsommet,nbarc,False)
+    if(is_correct):
+        print("L'ordo est correct, passons au calcul du rang\n")
+        tab_rang=rang(initial,terminal,nbsommet,False)
+        calendrier=tacheetsalongueur(tab_rang,initial,arc,nbsommet)
+        calendrier=predecesseurs(calendrier,initial,terminal)
+        calendrier=date_par_predecesseurs(calendrier)
+        calendrier.append(["date o plus tot"])
+        for date in calendrier[4]:
+            if(date!='dateparprec'):
+                if ('/' in date):
+                    separation=date.split("/")
+                    for elements in separation:
+                        if (elements!=""):
+                            if(int(elements)>max_value):
+                                max_value=int(elements)
+                            calendrier[5].append(int(elements))
+                            max_value=0
+                else:
+                    calendrier[5].append(int(date))
+    if(afficher==True):
+        afficher_tableau(calendrier)
+
+
+def predecesseurs(calendrier,initial,terminal):
+    prec_sommet=[]
+    predecesseurs=[]
+    string=""
+    predecesseurs.append("predecesseurs")
+    for i in range (1,len(calendrier[1])):#pour chaque sommets:
+        for j in range(0,len(terminal)):#on parcours le tableau terminal
+            if(terminal[j]==calendrier[1][i]):#si les valeurs se ressemblent
+                prec_sommet.append(initial[j])#on stocke l'extremité initial dans un tableau
+        for elements in prec_sommet:#on transforme le tableau en string
+            if(len(prec_sommet)>1):
+                string+=str(elements)+"/"
+            elif(len(prec_sommet)==1):
+                string=str(elements)
+        predecesseurs.append(string)#on ajoute dans le calendrier
+        prec_sommet.clear()
+        string=""
+    calendrier.append(predecesseurs)
+    return calendrier
+
+def date_par_predecesseurs(calendrier):
+    string=""
+    calendrier.append(["dateparprec"])
+    tab_renvoie=[[]]
+    val_max=0
+    compteur=0
+    for i in range(1,len(calendrier[3])):#pour toutes les case de la ligne predecesseur
+        if(calendrier[3][i]=='' or calendrier[3][i]=='0'):
+            calendrier[4].append('0')
+        else:
+            if('/' in calendrier[3][i]):
+                separation=calendrier[3][i].split('/')
+                for elements in separation:
+                    if(elements!=''):
+                        tab_renvoie[0].append(int(elements))
+                #pour les longueurs
+                tab_renvoie.append([])#on crée une nouvelle ligne dans le tableau
+                for pred in tab_renvoie[0]:
+                    for j in range(1,len(calendrier[1])):
+                        if(pred==calendrier[1][j]):#si le predecesseur est egal sommet courant
+                            tab_renvoie[1].append(calendrier[2][j])
+                #pour les dates par prédecesseurs
+                tab_renvoie.append([])#on crée une nouvelle ligne dans le tableau
+                for pred in tab_renvoie[0]:#pour chaque pred,
+                #on cherche la date par pred
+                    for j in range (1,len(calendrier[4])):#pour tous les sommets qui ont une date
+                        if(pred==calendrier[1][j]):#si on trouve la bonne colonne
+                            separe_date=calendrier[4][j].split("/")#on prend toutes les dates"
+                            for truc in separe_date:#on cherche la valeur la plus grande
+                                if(truc!=""):
+                                    if(int(truc)>val_max):
+                                        val_max=int(truc)
+                    tab_renvoie[2].append(val_max)
+                    val_max=0
+                if(len(tab_renvoie[0])==len(tab_renvoie[2])):
+                    tab_renvoie=calcul_date(tab_renvoie)
+                    for h in tab_renvoie[3]:
+                        string+=str(h)+"/"
+                    calendrier[4].append(string)
+                    string=""
+                    tab_renvoie=[[]]
+                    val_max=0
+
+            else:
+                tab_renvoie[0].append(int(calendrier[3][i]))
+                tab_renvoie.append([])
+                for j in range(1,len(calendrier[1])):
+                    if(int(calendrier[3][i])==calendrier[1][j]):#si le predecesseur est egal sommet courant
+                        tab_renvoie[1].append(calendrier[2][j])
+                tab_renvoie.append([])#on crée une nouvelle ligne dans le tableau
+                for j in range(1,len(calendrier[4])):
+                    if(int(calendrier[3][i])==calendrier[1][j]):#si le predecesseur est egal sommet courant
+                        if("/" in calendrier[4][j]):#si le predecesseur a plusieurs dates
+                            separe_date=calendrier[4][j].split("/")
+                            for truc in separe_date:#on cherche la valeur la plus grande
+                                if(truc!=""):
+                                    if(int(truc)>val_max):
+                                        val_max=int(truc)
+                            tab_renvoie[2].append(int(val_max))
+                        else:
+                            tab_renvoie[2].append(int(calendrier[4][j]))
+                if(len(tab_renvoie[0])==len(tab_renvoie[2])):
+                    tab_renvoie=calcul_date(tab_renvoie)
+                    calendrier[4].append(str(tab_renvoie[3]))
+                    tab_renvoie=[[]]
+    return calendrier
+
+
+def calcul_date(tab_renvoie):
+
+    taille_tab=len(tab_renvoie[0])
+    if(taille_tab==1):
+        value=tab_renvoie[1][0]+tab_renvoie[2][0]
+        tab_renvoie.append(value)
+    else:
+        tab_renvoie.append([])
+        for i in range (0,taille_tab):
+            value=tab_renvoie[1][i]+tab_renvoie[2][i]
+            tab_renvoie[3].append(value)
+    return tab_renvoie
+
+
+"""
+def calendrier_oplutar();
+
+
+
+def successeur():
+
+def date_par_successeur():
+"""
 
 def main():
     graph=lire_un_fichier()
     initial,terminal,arc,nbsommet,nbarc=separation(graph)
     #matrice_adj=matrice_adjacence(initial,terminal,arc,nbsommet,nbarc)
     #matrice_val=matrice_valeur(initial,terminal,arc,nbsommet,nbarc)
-    #detect_circuit(initial,terminal,nbsommet,True)
-    #ordo(initial,terminal,arc,nbsommet,nbarc,graph)
-    rang(initial, terminal,nbsommet,True)
+    #detect_circuit(initialtab,terminaltab,nbsommet,True)
+    #ordo(initial,terminal,arc,nbsommet,nbarc,graph,True)
+    #tab_rang=rang(initial, terminal,nbsommet,True)
+    calendrier_opluto(initial,terminal,arc,nbsommet,nbarc,True)
 
 
 main()
