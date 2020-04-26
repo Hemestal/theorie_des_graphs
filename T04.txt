@@ -1,0 +1,359 @@
+<_io.TextIOWrapper name='G04.txt' mode='r' encoding='cp1252'>
+
+
+
+***** Projet Theorie des Graphes *****
+***** TON Steven, HULIN Pauline, PASCO-CASTILLO Marc *****
+
+
+
+ 1: G01
+ 2: G02
+ 3: G03
+ 4: G04
+ 5: G05
+ 6: G06
+ 7: G07
+ 8: G08
+ 9: G09
+10: G10
+11: G11
+12: G12
+13: G13
+14: Exit
+
+Le graphe choisi est le : 4
+
+
+
+Choisissez quelle fonction executer
+
+
+
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 1
+
+
+nombre de sommets: 15 
+
+nombre d'arcs: 23 
+
+0 -> 1 = 0 
+
+0 -> 2 = 0 
+
+4 -> 5 = 1 
+
+13 -> 14 = 1 
+
+1 -> 3 = 2 
+
+1 -> 6 = 2 
+
+6 -> 5 = 2 
+
+6 -> 7 = 2 
+
+6 -> 13 = 2 
+
+6 -> 11 = 2 
+
+10 -> 12 = 2 
+
+3 -> 4 = 4 
+
+2 -> 6 = 5 
+
+7 -> 8 = 5 
+
+7 -> 12 = 5 
+
+8 -> 5 = 5 
+
+8 -> 9 = 5 
+
+8 -> 12 = 5 
+
+12 -> 14 = 5 
+
+5 -> 14 = 9 
+
+9 -> 10 = 9 
+
+9 -> 12 = 9 
+
+11 -> 13 = 19 
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 2
+
+
+['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+[2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+[3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[6, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0]
+[7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0]
+[8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0]
+[9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0]
+[10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+[11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+[12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 3
+
+
+['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+[0, '*', 0, 0, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+[1, '*', '*', '*', 2, '*', '*', 2, '*', '*', '*', '*', '*', '*', '*', '*']
+[2, '*', '*', '*', '*', '*', '*', 5, '*', '*', '*', '*', '*', '*', '*', '*']
+[3, '*', '*', '*', '*', 4, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+[4, '*', '*', '*', '*', '*', 1, '*', '*', '*', '*', '*', '*', '*', '*', '*']
+[5, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 9]
+[6, '*', '*', '*', '*', '*', 2, '*', 2, '*', '*', '*', 2, '*', 2, '*']
+[7, '*', '*', '*', '*', '*', '*', '*', '*', 5, '*', '*', '*', 5, '*', '*']
+[8, '*', '*', '*', '*', '*', 5, '*', '*', '*', 5, '*', '*', 5, '*', '*']
+[9, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 9, '*', 9, '*', '*']
+[10, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 2, '*', '*']
+[11, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 19, '*']
+[12, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 5]
+[13, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', 1]
+[14, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 4
+
+
+points d'entrées:
+
+[0]
+sommet restant:
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+points d'entrées:
+
+[1, 2]
+sommet restant:
+
+[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+points d'entrées:
+
+[3, 6]
+sommet restant:
+
+[4, 5, 7, 8, 9, 10, 11, 12, 13, 14]
+points d'entrées:
+
+[4, 7, 11]
+sommet restant:
+
+[5, 8, 9, 10, 12, 13, 14]
+points d'entrées:
+
+[8, 13]
+sommet restant:
+
+[5, 9, 10, 12, 14]
+points d'entrées:
+
+[5, 9]
+sommet restant:
+
+[10, 12, 14]
+points d'entrées:
+
+[10]
+sommet restant:
+
+[12, 14]
+points d'entrées:
+
+[12]
+sommet restant:
+
+[14]
+Ce graphe n'a pas de circuit
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 5
+
+
+Calcul du rang
+ Méthode d’élimination des points d’entrée
+
+rang courant =  0 
+
+points d'entrées:
+ [0] 
+
+rang courant =  1 
+
+points d'entrées:
+ [1, 2] 
+
+rang courant =  2 
+
+points d'entrées:
+ [3, 6] 
+
+rang courant =  3 
+
+points d'entrées:
+ [4, 7, 11] 
+
+rang courant =  4 
+
+points d'entrées:
+ [8, 13] 
+
+rang courant =  5 
+
+points d'entrées:
+ [5, 9] 
+
+rang courant =  6 
+
+points d'entrées:
+ [10] 
+
+rang courant =  7 
+
+points d'entrées:
+ [12] 
+
+rang courant =  8 
+
+points d'entrées:
+ [14] 
+
+['rang', 0, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8]
+['sommet', 0, 1, 2, 3, 6, 4, 7, 11, 8, 13, 5, 9, 10, 12, 14]
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 6
+
+
+il y a bien une seule entrée
+
+il y a bien une seule sortie
+
+il n'y a pas de circuit
+
+valeurs identiques pour tous les arcs incidents vers l’extérieur à un sommet
+
+arcs incidents vers l’extérieur au point d’entrée de valeur nulle
+pas d’arc à valeur négative
+c'est un ordonnancement correct
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: changer de graphes
+9: exit
+
+
+
+
+
+Vous executez la fonction : 7
+
+
+['rang', 0, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8]
+['sommet', 0, 1, 2, 3, 6, 4, 7, 11, 8, 13, 5, 9, 10, 12, 14]
+['longueur', 0, 2, 5, 4, 2, 1, 5, 19, 5, 1, 9, 9, 2, 5, None]
+['predecesseurs', '', '0', '0', '1', '1/2/', '3', '6', '6', '7', '6/11/', '4/6/8/', '8', '9', '10/7/8/9/', '13/12/5/']
+['date par predecesseurs', '0', '0', '0', '2', '2/5/', '6', '7', '7', '12', '7/26/', '7/7/17/', '17', '26', '28/12/17/26/', '27/33/26/']
+['date au plus tôt', 0, 0, 0, 2, 5, 6, 7, 7, 12, 26, 17, 17, 26, 28, 33]
+
+

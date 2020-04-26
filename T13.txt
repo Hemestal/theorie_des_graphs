@@ -1,0 +1,257 @@
+<_io.TextIOWrapper name='G13.txt' mode='r' encoding='cp1252'>
+
+
+
+***** Projet Theorie des Graphes *****
+***** TON Steven, HULIN Pauline, PASCO-CASTILLO Marc *****
+
+
+
+ 1: G01
+ 2: G02
+ 3: G03
+ 4: G04
+ 5: G05
+ 6: G06
+ 7: G07
+ 8: G08
+ 9: G09
+10: G10
+11: G11
+12: G12
+13: G13
+14: Exit
+
+Le graphe choisi est le : 13
+
+
+
+Choisissez quelle fonction executer
+
+
+
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 1
+
+
+nombre de sommets: 10 
+
+nombre d'arcs: 18 
+
+0 -> 1 = 0 
+
+0 -> 2 = 0 
+
+6 -> 9 = 1 
+
+8 -> 9 = 1 
+
+1 -> 5 = 2 
+
+1 -> 4 = 2 
+
+1 -> 2 = 2 
+
+5 -> 6 = 2 
+
+5 -> 7 = 2 
+
+2 -> 4 = 3 
+
+2 -> 3 = 3 
+
+8 -> 2 = 3 
+
+3 -> 7 = 5 
+
+3 -> 9 = 5 
+
+4 -> 5 = 6 
+
+4 -> 6 = 6 
+
+4 -> 8 = 6 
+
+7 -> 8 = 6 
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 2
+
+
+['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+[1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0]
+[2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+[3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1]
+[4, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0]
+[5, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+[6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+[8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1]
+[9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 3
+
+
+['', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[0, '*', 0, 0, '*', '*', '*', '*', '*', '*', '*']
+[1, '*', '*', 2, '*', 2, 2, '*', '*', '*', '*']
+[2, '*', '*', '*', 3, 3, '*', '*', '*', '*', '*']
+[3, '*', '*', '*', '*', '*', '*', '*', 5, '*', 5]
+[4, '*', '*', '*', '*', '*', 6, 6, '*', 6, '*']
+[5, '*', '*', '*', '*', '*', '*', 2, 2, '*', '*']
+[6, '*', '*', '*', '*', '*', '*', '*', '*', '*', 1]
+[7, '*', '*', '*', '*', '*', '*', '*', '*', 6, '*']
+[8, '*', '*', 3, '*', '*', '*', '*', '*', '*', 1]
+[9, '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 4
+
+
+points d'entrées:
+
+[0]
+sommet restant:
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+points d'entrées:
+
+[1]
+sommet restant:
+
+[2, 3, 4, 5, 6, 7, 8, 9]
+points d'entrées:
+
+[]
+sommet restant:
+
+[2, 3, 4, 5, 6, 7, 8, 9]
+ce graphe comporte un circuit
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 5
+
+
+impossible votre graphe comporte un circuit
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 6
+
+
+il y a bien une seule entrée
+
+il y a bien une seule sortie
+
+l'ordonnancement n'est pas correct, le graphe comporte un circuit
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 7
+
+
+Ce graphe comporte un circuit donc on ne peut pas.
+
+
+1: lire un fichier
+2: matrice adjacence
+3: matrice des valeurs
+4: detection de circuit
+5: calcul du rang
+6: ordonnancement
+7: calendrier au plus tot, au plus tard et marge
+8: exit
+
+
+
+
+
+Vous executez la fonction : 8
+
+
